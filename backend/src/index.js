@@ -9,7 +9,8 @@ import { app, server } from "./lib/socket.js";
 import path from "path";
 dotenv.config();
 
-app.use(express.json());
+app.use(express.json({ limit: "10mb" })); // Middleware to parse JSON bodies from incoming requests, with a size limit of 10mb to prevent abuse
+app.use(express.urlencoded({ extended: true, limit: "10mb" })); //Middleware enables parsing of URL-encoded request bodies with a 10MB size limit and extended syntax support.
 app.use(
   cors({
     origin: "http://localhost:5173",
